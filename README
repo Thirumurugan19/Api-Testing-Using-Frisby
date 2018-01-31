@@ -1,0 +1,59 @@
+1.mkdir & cd FrisbyApiTest
+2.Create package.json file
+3.npm init 
+4.npm install frisby --save-dev
+5.npm install --save-dev jest
+6.vi/nano package.json and change test : "jest"
+7.npm install
+8.Create __tests__ (double underscore)
+9.__tests__/api/api_spec.js , chimp_api_spec.js
+
+----------------Example code -----------
+
+const frisby = require('frisby');
+
+it('should be a teapot', function (done) {
+  frisby.get('http://httpbin.org/status/418')
+    .expect('status', 418)
+    .done(done);
+});
+----------------
+8.$npm test or jest (from command line )
+
+~~~~~~~~~~~~Output will look like below -------
+> apitest@1.0.0 test /home/thirumurugan/apiTest
+> jest
+
+ PASS  __tests__/api/api_spec.js
+  ✓ should be a teapot (914ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.467s, estimated 2s
+Ran all test suites.
+~~~~~~~~~~~~~~~
+
+Create a sample file with chimp_api_spec.js , paste below code and do add for testing many assertion/testcase and run "jest" command on same directory 
+=====================
+
+const frisby = require('frisby');
+
+it ('GET should return a status of 200 OK', function (done) {
+  frisby
+    .get('https://edgy-monkey-pr-1923.herokuapp.com/api/v2/users/login')
+    .inspectJSON()
+    .done(done);
+});
+
+it ('Should get content type', function (done) {
+  frisby
+    .get('https://edgy-monkey-pr-1923.herokuapp.com/api/v2/users/login')
+    .inspectHeaders()
+    .done(done);
+});
+
+====================
+
+Website : https://www.frisbyjs.com/
+
